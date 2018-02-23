@@ -62,7 +62,7 @@ int main()
 	for (int i = 0; i < row; i++)
 		x[i] = v[i][col - 1];
 	//Вывод результата
-	cout << "Answer:";
+	cout << "Answer: ";
 	for (int i = 0; i < row; i++)
 		cout << x[i] << " ";
 	cout << endl;
