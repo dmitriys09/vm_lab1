@@ -20,6 +20,7 @@ void show_matrix(vector<vector<float> > &a, size_t row, size_t col)
 void Gauss_method(vector<vector<float> > &a, size_t row, size_t col) {
 	float mpl = 0;//множитель
 	//прямой ход
+	cout << endl << "PR HOD:" << endl;
 	for (int n = 0; n < row; n++) {
 		for (int k = row; k >= n; k--)
 			a[n][k] /= a[n][n];
@@ -28,10 +29,10 @@ void Gauss_method(vector<vector<float> > &a, size_t row, size_t col) {
 			for (int j = 0 + n; j < col; j++)
 				a[i][j] = a[i][j] - (a[n][j] * mpl);
 		}
-		cout << endl << "PR HOD:" << endl;
-		show_matrix(a, row, col);
 	}
+	show_matrix(a, row, col);
 	//обратный ход
+	cout << endl << "OBR HOD: " << endl;
 	for (int n = row - 1; n >= 0; n--) {
 		for (int i = 0; i < n; i++) {
 			mpl = a[i][n] / a[n][n];
@@ -39,7 +40,6 @@ void Gauss_method(vector<vector<float> > &a, size_t row, size_t col) {
 			a[i][col - 1] -= a[n][col - 1] * mpl;
 		}
 	}
-	cout << endl << "OBR HOD: " << endl;
 	show_matrix(a, row, col);
 }
 
@@ -49,15 +49,14 @@ int main()
 	vector<vector<float>> v = { { -1, 4, 2, 7 },
 	{ 2, -6, -3, 10 },
 	{ 2, -5, -2, -7}, };
+	cout << "Matrix:" << endl;
+	show_matrix(v, row, col);
 	//поднимаем строку с самым маленьким первым элементом
 	for (size_t i = 1; i < row; i++)
-		if (v[0][0] < v[i][0])
+		if (v[0][0] < v[i][0])//если верхний элемент меньше, то свап на больший элемент
 			for (size_t j = 0; j < col; j++)
-				swap(v[i][j], v[0][j]);	
-	cout << endl << "SWAP ROWS: " << endl;
-	show_matrix(v, row, col);
-
-	cout << "Matrix:" << endl;
+				swap(v[i][j], v[0][j]);
+	cout << endl << "After SWAP ROWS: " << endl;
 	show_matrix(v, row, col);
 	
 	Gauss_method(v, row, col);
